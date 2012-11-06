@@ -1,26 +1,21 @@
-
 organization := "com.weiglewilczek.slf4s"
 
 name := "slf4s"
 
 version := "1.0.7"
 
-scalaVersion := "2.9.1"
-
-crossScalaVersions := Seq(
-    "2.8.0",
-    "2.8.1",
-    "2.9.0-1",
-    "2.9.1")
+scalaVersion := "2.10.0-RC1"
 
 libraryDependencies ++= Seq(
-    "org.slf4j" % "slf4j-api" % "1.6.1")
+  "org.slf4j" % "slf4j-api" % "1.6.1"
+)
 
-publishTo <<= (version) { v => 
-  if (v endsWith "SNAPSHOT")
-    Some("ScalaTools-Nexus-Snapshots" at "http://nexus.scala-tools.org/content/repositories/snapshots/")
+publishTo <<= version { (v: String) =>
+  val nexus = "http://mvn.compose.cc:8081/nexus/content/repositories"
+  if (v.trim.endsWith("SNAPSHOT"))
+    Some("Blend Snapshots (publish)" at nexus + "/snapshots/")
   else
-    Some("ScalaTools-Nexus-Releases" at "http://nexus.scala-tools.org/content/repositories/releases/")
+    Some("Blend Releases"  at nexus + "/releases/")
 }
 
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
