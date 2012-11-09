@@ -10,12 +10,6 @@ libraryDependencies ++= Seq(
   "org.slf4j" % "slf4j-api" % "1.6.1"
 )
 
-publishTo <<= version { (v: String) =>
-  val nexus = "http://mvn.compose.cc:8081/nexus/content/repositories"
-  if (v.trim.endsWith("SNAPSHOT"))
-    Some("Blend Snapshots (publish)" at nexus + "/snapshots/")
-  else
-    Some("Blend Releases"  at nexus + "/releases/")
-}
-
 credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+
+publishTo := Some("Blend Repository" at "https://blend.artifactoryonline.com/blend/blend")
